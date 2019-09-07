@@ -29,6 +29,9 @@ GEM
       multipart-post (>= 1.2, < 3)
     ffi (1.11.1)
     forwardable-extended (2.6.0)
+    garth-jekyll-theme (1.0.3)
+      jekyll (~> 3.6)
+      jekyll-paginate (~> 1.1)
     gemoji (3.0.1)
     github-pages (198)
       activesupport (= 4.2.11.1)
@@ -242,9 +245,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  garth-jekyll-theme
   github-pages
   jekyll-feed (~> 0.6)
-  minima (~> 2.0)
   tzinfo-data
 
 BUNDLED WITH

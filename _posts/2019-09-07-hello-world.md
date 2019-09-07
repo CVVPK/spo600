@@ -7,6 +7,8 @@ categories: other
 
 Hello World! This is my first post.
 
+<!-- more -->
+
 This site is built using Jekyll. To learn more check out the [Jekyll docs][jekyll-docs] and [Jekyll’s GitHub repo][jekyll-gh]. 
 
 [jekyll-docs]: https://jekyllrb.com/docs/home
