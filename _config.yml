@@ -22,9 +22,9 @@ github_username: cvvpk
 # Build settings
 markdown: kramdown
 # theme: garth-jekyll-theme
-remote_theme: daviddarnes/garth
+# remote_theme: daviddarnes/garth
 plugins:
-    - jekyll-remote-theme
+    # - jekyll-remote-theme
     - jekyll-feed
     - jekyll-paginate
 # Exclude from processing.
