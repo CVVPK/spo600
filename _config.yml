@@ -1,35 +1,21 @@
-# Welcome to Jekyll!
-#
-# This config file is meant for settings that affect your whole blog, values
-# which you are expected to set up once and rarely edit after that. If you find
-# yourself editing this file very often, consider using Jekyll's data files
-# feature for the data you need to update frequently.
-#
-# For technical reasons, this file is *NOT* reloaded automatically when you use
-# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
+# Config File
 
-# Site settings
-# These are used to personalize your new site. If you look in the HTML files,
-# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
-# You can create any custom variable you would like, and they will be accessible
-# in the templates via {{ site.myvariable }}.
+# Site Settings
 title: SPO600 Blog
 email: your-email@example.com
 description: "A blog for SPO600 class"
-baseurl: "/spo600" # the subpath of your site, e.g. /blog
-url: "https://cvvpk.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+baseurl: "/spo600"
+url: "https://cvvpk.github.io"
 github_username: cvvpk
+
 # Build settings
 markdown: kramdown
-# theme: garth-jekyll-theme
-# remote_theme: daviddarnes/garth
 plugins:
-    # - jekyll-remote-theme
     - jekyll-feed
     - jekyll-paginate
+
 # Exclude from processing.
-# The following items will not be processed, by default. Create a custom list
-# to override the default setting.
+# The following items will not be processed, by default.
 exclude:
     - Gemfile
     - Gemfile.lock
@@ -47,7 +33,6 @@ sass:
     style: compressed # Style compression
 permalink: pretty # Permalink style (/YYYY/MM/DD/page-name/)
 excerpt_separator: <!-- more --> # Marks end of excerpt in posts
-
 collections:
     posts:
         title: Blog # Needed for Siteleaf
