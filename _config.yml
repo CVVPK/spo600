@@ -39,4 +39,4 @@ collections:
         output: true
         description: "A blog for SPO600 class"
 logo: "/assets/logo.png" # Site logo
-favicon: "./assets/favicon.ico"
+favicon: "/assets/favicon.ico"

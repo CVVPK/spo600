@@ -1,13 +1,15 @@
 ---
 layout: post
-title: Working Title
-date: 2019-09-17
+title: GCC Compiler Options
+date: 2019-09-21
+categories: Lab
 ---
 
 For [Lab 2](https://wiki.cdot.senecacollege.ca/wiki/SPO600_Compiled_C_Lab) we were asked to compile a simple Hello World program in C using a variety of GCC compiler options, we were then to take a look at what the resulting assembly instructions looked like and how the different compiler options may affect performance.
 
-The different variations of the compiled program we worked on were:
+<!-- more -->
 
+The different variations of the compiled program we worked on were:
 - [Using -g -O0 -fno-builtin](#using--g--o0--fno-builtin)
 - [Removing -g](#removing--g)
 - [Replacing -O0 with -O3](#replacing--o0-with--o3)
@@ -15,8 +17,6 @@ The different variations of the compiled program we worked on were:
 - [Adding -static](#adding--static)
 - [Adding additional arguments to printf()](#adding-additional-arguments-to-printf)
 - [Moving printf() outside of main()](#moving-printf-outside-of-main)
-
-<!-- more -->
 
 The C code used looked like this:
 

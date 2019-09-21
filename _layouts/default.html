@@ -15,7 +15,7 @@
 		<link rel="stylesheet" href="{{ "/assets/styles.css" | relative_url }}">
 
 		{% if site.favicon %}
-			<link rel="shortcut icon" href="{{ site.favicon }}">
+			<link rel="shortcut icon" href="{{ site.favicon | relative_url}}">
 		{% else %}
 			<link rel="shortcut icon" href="{{ site.logo }}">
 		{% endif %}
