@@ -1,7 +1,7 @@
 ---
 layout: post
 title: GCC Compiler Options
-date: 2019-09-22
+date: 2019-09-21T18:00:00Z
 categories: Lab
 ---
 
