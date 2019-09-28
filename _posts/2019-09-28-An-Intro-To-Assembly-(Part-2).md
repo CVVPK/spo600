@@ -517,5 +517,5 @@ Although writing a simple program in assembly is such a tedious task, I had fun 
 
 Assembly might not be most people's cup of tea, but I think that knowing the basics of it is a great way to get an idea of what goes under the hood of most operations we write in higher level languages.
 
-[part-1]: {% post_url 2019-09-27-An-Intro-To-Assembly-(Part-1) %}
+[part-1]: {{site.baseurl}}{% post_url 2019-09-27-An-Intro-To-Assembly-(Part-1) %}
 [lab-3]: https://wiki.cdot.senecacollege.ca/wiki/SPO600_Assembler_Lab
