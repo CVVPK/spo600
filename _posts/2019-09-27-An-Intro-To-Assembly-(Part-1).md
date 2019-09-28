@@ -157,7 +157,7 @@ Now we are going to take a look at what it takes to accomplish the same task usi
 
 Source code for GNU assembler:
 
-```
+```as
 .text
 .globl  _start
 
@@ -180,7 +180,7 @@ msg:    .ascii      "Hello, world!\n"
 
 Source code for NASM Assembler:
 
-```
+```nasm
 section .text
 global  _start
 
@@ -238,7 +238,7 @@ Because of the difference in the number of instructions we see a huge improvemen
 
 We will now take a quick look at how we would write our Hello World program on AArch64. 
 
-```
+```as
 .text
 .globl _start
 _start:
