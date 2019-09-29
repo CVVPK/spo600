@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Why learn assembly?
+title: Why Learn Assembly?
 date: 2019-09-25
 categories: Thoughts
 ---
