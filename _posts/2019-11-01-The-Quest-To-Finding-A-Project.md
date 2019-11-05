@@ -1,7 +1,8 @@
 ---
 layout: post
 title: The Quest To Finding A Project
-date: 2019-11-05
+date: 2019-11-01
+categories: other
 ---
 
 In my [SPO 600] class we have been asked to find an open source project that could use some performance improvements. This is proving to be a bigger challenge than I had previously anticipated. There are thousands of open source projects, thus there are equally thousands of opportunities for optimizations, which is great. However, being able to notice where improvements can be made is difficult and the large number of potential projects is overwhelming. Personally I dislike being overwhelmed with a seemingly infinite number of options as it often leads to a lack of focus and facilitates procrastination. In order to manage the task I have come up with a plan that will, hopefully, help me find a project to work on.
