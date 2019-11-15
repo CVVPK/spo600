@@ -9,11 +9,26 @@ As I mentioned [before][lastpost] I couldn't get gprof to work to profile Opus. 
 
 Valgrind is a suite of tools, the particular tool of interest is [Callgrind]. With Callgrind we are able to record the function calls, and from the data recorded we can generate a call graph. To visualize the data we can use [Kcachegrind], which allows us to see the entire flow of our program and we can even look at the callgraph.
 
+Using callgrind is a simple as running:
+
+```
+valgrind --tool=callgrind ./yourProgram
+
+```
+
+Then to visualize the data is just a matter opening the output file with kcachegrind:
+
+```
+kcachegrind callgrindOutputFile
+```
+
+The Opus callgraph when encoding audio data using the SILK codec looks like this:
+
 <a href="https://ibb.co/xf6dvYc"><img src="https://i.ibb.co/hZVw5cn/Screenshot-from-2019-11-15-17-42-53.png" alt="Screenshot-from-2019-11-15-17-42-53" border="0"></a>
 
 The callgraph agrees with some of the data recorded by perf. We once again see `silk_NSQ_del_dec_c` consuming most of the process' time. I initially thought I'd look into optimizing this function since it consumes so much time, but it turns out that it's a huge function (over 300 lines) and as such it may be too much for this project considering the constricted amount of time we have.
 
-So I had to resume my search for a smaller function so that I may complete the project in time. `silk_insertion_sort_increasing` caught my eye, the name of the function would indicate that its using insertion sort which is one of the slowest sorting algorithms with a worst case of O(n^2), though in a sorted array it has a best case scenario of O(n).
+So I had to resume my search for a smaller function so that I may complete the project in time. `silk_insertion_sort_increasing` caught my eye, the name of the function would indicate that its using insertion sort which is one of the slowest sorting algorithms with a worst case of O(n<sup>2</sup>), though in a sorted array it has a best case scenario of O(n).
 
 It is interesting to see them using insertion sorting, and it could be the best for this use case. However, seeing that roughly 8% of execution time is being spent in this function makes me wonder if there may not be a faster way of doing it. It may just be that the data I used was the worst case scenario and maybe in average this function is expected to work in a near best case scenario.
 
