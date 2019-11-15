@@ -9,7 +9,7 @@ As I mentioned [before][lastpost] I couldn't get gprof to work to profile Opus. 
 
 Valgrind is a suite of tools, the particular tool of interest is [Callgrind]. With Callgrind we are able to record the function calls, and from the data recorded we can generate a call graph. To visualize the data we can use [Kcachegrind], which allows us to see the entire flow of our program and we can even look at the callgraph.
 
-**INSERT CALLGRAPH HERE**
+<a href="https://ibb.co/xf6dvYc"><img src="https://i.ibb.co/hZVw5cn/Screenshot-from-2019-11-15-17-42-53.png" alt="Screenshot-from-2019-11-15-17-42-53" border="0"></a>
 
 The callgraph agrees with some of the data recorded by perf. We once again see `silk_NSQ_del_dec_c` consuming most of the process' time. I initially thought I'd look into optimizing this function since it consumes so much time, but it turns out that it's a huge function (over 300 lines) and as such it may be too much for this project considering the constricted amount of time we have.
 
@@ -19,9 +19,9 @@ It is interesting to see them using insertion sorting, and it could be the best 
 
 ## Next steps
 
-I've decided to further investigate the `silk_insertion_sort_increasing` function, and find if there is a way of improving it. First I'll try to use different sorting algorithms, already looking through some of the [SILK documentation] it seems shell sort was considered at some point but it never got implemented by the Opus team. This gives me an opportunity to investigate a possible optimization, I'll continue trying to contact the developer team and discuss whether shell sort has already been tested or if there is a reason for it to not having been implemented. My goal will now be to find a way to optimize sorting on all architectures, which means making changes in plain C and not using any architecture specific intrinsics or assembler.
+I've decided to further investigate the `silk_insertion_sort_increasing` function, and find if there is a way of improving it. First I'll try to use different sorting algorithms, already looking through some of the [SILK documentation] it seems shell sort was considered at some point but it never got implemented by the Opus team. This gives me an opportunity to investigate a possible optimization, I'll continue trying to contact the developer team and discuss whether shell sort has already been tested or if there is a reason for it to not having been implemented. My goal will now be to find a way to optimize the `silk_insertion_sort_increasing` function on all architectures, which means making changes in plain C and not using any architecture specific intrinsics or assembler.
 
-[lastPost]:{{site.baseurl}}{% post_url Opus:-Initial-Profiling %}
+[lastPost]:{{site.baseurl}}{% post_url 2019-11-10-Opus:-Initial-Profiling %}
 [Callgrind]: http://valgrind.org/docs/manual/cl-manual.html
 [Kcachegrind]:http://kcachegrind.sourceforge.net/html/Home.html
 [SILK documentation]:https://tools.ietf.org/html/draft-vos-silk-01#page-416
