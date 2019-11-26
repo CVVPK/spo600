@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Issues With Optimizing The Opus Encoder
+title: Issues Trying To Optimize The Opus Encoder
 date: 2019-11-25
 categories: Project
 ---
