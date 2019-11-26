@@ -60,7 +60,7 @@ user	3m3.802s
 sys	0m1.265s
 ```
 
-A rounding error, it really changed nothing in terms of performance. Interesting, since when I did my [initial profiling using Callgrind] this function showed up with a significant amount of run time. I've redone the profiling with Callgrind without sorting and got the same results I had before, which has led me to stop trusting them. It is possible that because the sorting function runs so fast but gets called thousands of times successively Callgrind is accumulating all these calls and that's why the function appears to take so much time.
+A rounding error, it really changed nothing in terms of performance. Interesting, since when I did my [initial profiling using Callgrind] this function showed up with a significant amount of run time. I've redone the profiling with Callgrind without sorting and got the same results I had before, which has led me to stop trusting them. It is possible that because the sorting function runs so fast, but gets called thousands of times successively, Callgrind is accumulating all these calls and that's why the function appears to take so much time.
 
 At this point it has become quite clear that there is no real optimization I could do to the sorting algorithm that would improve the performance of the Opus encoder. The current implementation is extremely optimized for this particular use case, and the added overhead of other algorithms like shell sort, heap sort or quick sort nullifies the reduced time complexity they offer. 
 
@@ -68,7 +68,7 @@ So, in hopes of being able to make a change that actually presents a performance
 
 This time I've learned how to do a quick check that helps me verify the data I get from perf and Callgrind (remove all the logic from the function and crosscheck run time). The function I've found is `warped_autocorrelation_FLP`. According to Callgrind this function takes around 10% of the run time, perf recorded around 13%. To verify this data I did what I should have done much earlier in the past and removed all the logic from the function, the result was a difference of around 20 seconds when encoding a 500 MB file, which is about 13% of 3m5s (the regular run time).
 
-Thus, I've confirmed that the data from perf and Callgrind about the running time of this function is accurate. What this means for me is that I first need to figure out what `warped_autocorrelation_FLP` does, and then make a new strategy as this is a very different function from my first choice.
+Thus, I've confirmed that the data from perf and Callgrind about this particular function is accurate. What this means for me is that I first need to figure out what `warped_autocorrelation_FLP` does, and then make a new strategy as this is a very different function from my first choice.
 
 [Shell Sort]:{{site.baseurl}}{% post_url 2019-11-19-Shell-Sort %}
 [initial profiling using Callgrind]: {{site.baseurl}}{% post_url 2019-11-13-Profiling-The-Opus-Encoder-with-Callgrind %}
