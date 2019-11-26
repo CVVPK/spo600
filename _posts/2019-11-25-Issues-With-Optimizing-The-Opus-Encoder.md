@@ -2,6 +2,7 @@
 layout: post
 title: Issues With Optimizing The Opus Encoder
 date: 2019-11-25
+categories: Project
 ---
 
 So after realizing [Shell Sort] didn't provide any performance improvements over the insertion sort implementation in the Opus encoder, I decided to take a pause and make sure the path I was following was correct.

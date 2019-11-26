@@ -2,6 +2,7 @@
 layout: post
 title: Shell Sort
 date: 2019-11-19
+categories: Project
 ---
 
 As I mentioned in my [previous post], I have chosen the function that I'm going to attempt to optimize inside the Opus reference encoder. The function I'm focusing on is called `silk_insertion_sort_increasing`. The primary job of this function is to sort a vector in-place. To do this it is currently using an insertion sort, I believe there may be a better approach, which has led me to analyzing a couple of other sorting algorithms and I'll then attempt to implement them.
