@@ -23,11 +23,12 @@ silk/float/SigProc_FLP.h:46:5: error: unknown type name ‘silk_float’; did yo
      ^~~~~~~~~~
      silk_max
  ```
- 
- It appears some parts of the floating point implementation aren't guarded by [preprocessor directives], so they throw errors because the floating point datatype wasn't defined.
 
- My next step will be to look into the codebase and see if I can just add the necessary guards so that I can compile and force the encoder to use the fixed point implementation. 
+It appears some parts of the floating point implementation aren't guarded by [preprocessor directives], so they throw errors because the floating point datatype wasn't defined.
 
+My next step will be to look into the codebase and see if I can just add the necessary guards so that I can compile and force the encoder to use the fixed point implementation. 
+
+Edit: After going through the documentation again, I realized what my mistake was. I'm building the package using autonconf and so I was supposed to pass the flag `--enable-fixed-point` and not define the FIXED_POINT macro manually like I had done before. This way make knows to ignore the floating point files that were previously throwing errors. I should be able to run tests now and compare the fixed point vs the floating point implementations on various AArch64 machines.
 
 [previous post]:{{site.baseurl}}{% post_url 2019-11-25-Issues-Trying-To-Optimize-The-Opus-Encoder %}
 [autocorrelation]: https://pages.mtu.edu/~suits/autocorrelation.html
