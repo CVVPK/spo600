@@ -15,6 +15,7 @@ I tested the fixed point implementation on two different AArch64 machines: (1)Co
 | Cortex-A53 | 2m38.317s   | 3m5.517s       |
 | Cortex-A57 | 0m44.522s   | 0m55.711s      |
 
+---
 These results showed a lot of promise, there's about a 15%-20% improvement by using the fixed point implementation over the default floating point one. However, these results are only true when the encoder only uses the SILK codec. 
 
 As I detailed in a [previous post] Opus uses two audio codecs: SILK and CELT. This means that using the fixed point implementation for the entire code base would require further testing to consider what happens when the CELT codec is used by the encoder. Moreover, the Opus encoder treats VoIP data differently to high quality audio, so these need to also be tested if I were to propose a change to the default implementation on AArch64.
