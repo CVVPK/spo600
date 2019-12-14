@@ -13,12 +13,12 @@ I was initially enthralled by this particular issue: ['Investigate optimizing Hi
 
 Profiling a VSCode extension is not very difficult, I won't go over the steps here, but if you are interested just follow this [link].  As mentioned before, I did multiple profilings and the results were pretty consistent with these: 
 
-- [largeFileFastEditing.cpuprofile.txt](../_site/assets/largeFileFastEditing.cpuprofile.txt)
-- [largeFileSlowEditing.cpuprofile.txt](../_site/assets/largeFileSlowEditing.cpuprofile.txt)
-- [oldNavigation.cpuprofile.txt](../_site/assets/oldNavigation.cpuprofile.txt)
+- [largeFileFastEditing.cpuprofile.txt]({{ site.baseurl }} {%link /assets/../../../_site/assets/largeFileFastEditing.cpuprofile.txt %})
+- [largeFileSlowEditing.cpuprofile.txt]({{ site.baseurl }}{% link /assets/largeFileSlowEditing.cpuprofile.tx %})
+- [oldNavigation.cpuprofile.txt]({{ site.baseurl }}{% link /assets/oldNavigation.cpuprofile.txt %})
 
 For reference, here's the profile of vscode with the Vim extension disabled:
-- [noVim.cpuprofile.txt](../site/assets/../../_site/assets/noVim.cpuprofile.txt)
+- [noVim.cpuprofile.txt]({{ site.baseurl }}{% link /assets/noVim.cpuprofile.txt %})
 
 To View these files, simply remove the txt extension, open up the developer tools in chrome (anything based off of chromium works), open the menu next to the 'x', go to more tools, click on Javascript profiler and load up the cpuprofiles. 
 
