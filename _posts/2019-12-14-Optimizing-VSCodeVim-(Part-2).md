@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Optimizing VSCodeVim (Part 2)
-date: 2019-12-14
+date: 2019-12-14 13:00:00
 categories: Project
 ---
 
