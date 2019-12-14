@@ -9,9 +9,9 @@ After my [previous post], I was pretty unmotivated with the state of my project 
 
 For a few days I kept banging my head against a wall, trying to come up with an idea. I really wanted to get a change upstream. Unfortunately, it just didn't seem likely with a project such as Opus were a lot of optimizations have already happened. I have abandoned the Opus project for now as it seemed unlikely that I'd be able to make a change that would be accepted on the upstream within the time frame I had. 
 
-Because of this, I started to toy with the idea of working on my secondary option: [VSCodeVim/Vim]. This is a plug in for VsCode that emulates the Vim editor. I use it on a daily basis, since VsCode is my editor of choice. 
+Because of this, I started to toy with the idea of working on my secondary option: [VSCodeVim/Vim]. This is an extension for VsCode that emulates the Vim editor. I use it on a daily basis, since VsCode is my editor of choice. 
 
-Initially I had disqualified the Vim plug in as a possible project because I was afraid that finding an optimization would be extremely difficult due to it being written in a very high level language (TypeScript) and many of its downfalls being because of the VsCode API. On the other hand, Opus had some pocket sized functions that I could try to do something about.
+Initially I had disqualified the Vim extension as a possible project because I was afraid that finding an optimization would be extremely difficult due to it being written in a very high level language (TypeScript) and many of its downfalls being because of the VsCode API. On the other hand, Opus had some pocket sized functions that I could try to do something about.
 
 I've switched gears and over the past few days I have been focusing on VSCodeVim. I wish had chosen it as my first option, after all it filled the three rules I had described on ['The Quest To Finding A Project']. Since I started working on it I have submitted two PRs ([1],[2]) that have gone upstream, both of them fixing major bugs introduced on the latest version.
 
