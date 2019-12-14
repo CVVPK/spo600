@@ -100,7 +100,7 @@ The initial if block is already in the codebase, I simply added the final else i
 
 Previously the faster we typed the worse the bigger the impact to performance we had, while with my proposed change we are basically running on vanilla VSCode while we are typing. Here's cpuprofile after applying this change:
 
-- [improvedAdd.cpuprofile.txt](/_site/assets/improvedAddChange.cpuprofile.txt)
+- [improvedAdd.cpuprofile.txt]({{site.baseurl}}{% link /assets/improvedAddChange.cpuprofile.txt %})
 
 
 [last post]:{{site.baseurl}}{% post_url 2019-12-12-VsCodeVim %}
