@@ -5,7 +5,7 @@ date: 2019-12-12
 categories: Project
 ---
 
-As I mentioned on my [last post], I'm now working on the [VsCodeVim] extension as my project for SPO600. Hopefully, my professor will see this and have mercy on my for having abandoned all efforts on my previous project (Opus). 
+As I mentioned on my [last post], I'm now working on the [VsCodeVim] extension as my project for SPO600. Hopefully, my professor will see this and have mercy on me for having abandoned all efforts on my previous project (Opus). 
 
 Here is what I did for profiling VsCodeVim. I used multiple files ranging from 250 KB to 3 MB. I have been using VSCodeVim for over a year, and have always known that its performance on larger files is pretty lack luster. If you take a look at the issues tagged as performance in [GitHub](https://github.com/VSCodeVim/Vim/labels/area%2Fperformance), you'll see that a lot of them are quite similar. Large file and repeated actions slow down the editor.
 
