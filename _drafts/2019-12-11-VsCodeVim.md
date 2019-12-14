@@ -176,7 +176,7 @@ Promise:
 const documentEnd = cursorPosition[0].getDocumentEnd();
     const eof = this.vimState.editor.document.offsetAt(
       documentEnd
-      // new Position(documentEnd.line, documentEnd.character)
+      
     );
     const maxBits = Math.ceil(eof / 15);
     const gettingText = async (range: vscode.Range) => {
@@ -210,3 +210,79 @@ const documentEnd = cursorPosition[0].getDocumentEnd();
     });
   }
     ```
+
+
+
+    I took a look at this and did some profiling, on large files there seem to be three major hotspots. from biggest to smallest:
+
+1) _getDocumentText()
+2) advancePositionByText()
+3) diff_main()
+
+Here are some of the cpuprofiles (I used various files of over 250 Kb for this and the results were pretty consistent across). The results show that the larger the file and the faster we make changes to the document, the worse this function performs. 
+
+I may have some ideas on how to increase the performance.
+
+**Insert Mode**
+The major issue is that addChange() gets called on every key press, and thus the entire document is getting processed every few milliseconds which is why we experience more lag the faster we make changes on large files. Currently the first change after going in insert mode triggers _addnewHistoryStep(), we log every step and then when we get out of insert mode we finalise that step.
+
+The interesting part, to me, and correct me if I'm wrong on this, but we only undo a historyStep at a time, so there really is no point in logging each change in order to build the step since those substeps are never used (not on anything that I can identify at least). 
+
+If we instead not log each individual substep, but grab a snapshot of the document once we are finished with our changes (when we get out of insert mode) we can reduce the number of times this function gets invoked and performance goes waaay up. 
+
+My suggestion is to add a condition at the start of the addChange() to check if currentMode === Mode.Insert so that we don't log unnecessary substeps. Because addChange() is called by modeHandler.runAction() after modeHandler.handleKeyEventHelper() has changed the currentMode, then runAc
+
+first before and currently it is during this call that we invoke _addNewHistoryStep(), when addChange() is called afterwards by modeHandler.runAction() there is no change to the document because it has already been logged. modeHandler.handleKeyEventHelper() is responsible for switching modes, but before that it makes a call to addChange().
+
+
+
+
+
+>sjkdkajdklasj
+**Check if offset at EOF is equals to oldText.length**
+
+Currently the first thing addChange() does is grab the text of the entire document, which as revealed by the profiling is a pretty expensive operation. We then check the newText against the oldText to see if there are any changes that need to be processed. There really is no need to get the entire document to know this.
+
+The zero based offset at the document's end represents the location of the character that would follow the last character, so it is incidentally equal to the length of the document's text. We can easily get this offset by using vscode.TextDocument.offsetAt() and passing it Position.getDocumentEnd(). If there are no changes this offset will be equals to historyTracker.oldText.length. 
+
+This would increase the performance when navigating through large files, currently passes all tests and should be 100% safe to add. 
+
+[newNavigation.cpuprofile.txt](https://github.com/VSCodeVim/Vim/files/3962659/newNavigation.cpuprofile.txt)
+[oldNavigation.cpuprofile.txt](https://github.com/VSCodeVim/Vim/files/3962660/oldNavigation.cpuprofile.txt)
+
+
+
+**Improvements to insert mode**
+
+The major issue is that addChange() gets called on every key press, and thus the entire document is getting processed every few milliseconds which is why we experience more lag the faster we make changes on large files. Currently the first change after going into insert mode triggers _addnewHistoryStep(), we log every change individually and then when we get out of insert mode we finalise the historyStep.
+
+The interesting part, to me, and correct me if I'm wrong on this, but we only undo a historyStep at a time, so there really is no point in logging each change in order to build the step since those substeps are never used anyway. 
+
+If we instead not log each individual substep, but grab a snapshot of the document once we are finished with our changes (when we get out of insert mode) we can reduce the number of times this function gets invoked and performance goes waaay up. 
+
+I thought of adding a condition at the start of addChange() to check if currentMode === Mode.Insert so that we don't unnecessarily log substeps. However, this fails some tests because the cursor is at the wrong position. This change would prohibit us to log in the very first change done after entering insert mode, instead it only logs the last change as the only change, thus cursorStart  is the same as cursorEnd.
+
+I believe I may be on the right track with this idea but I'm not sure how we could log only the first and last change, maybe add a way to know if we just switched modes?.
+
+
+
+
+**THIS IS MY PR**
+
+**Check if offset at EOF is equals to oldText.length**
+
+Currently the first thing addChange() does is grab the text of the entire document, which as revealed by the profiling is a pretty expensive operation. We then check the newText against the oldText to see if there are any changes that need to be processed. There really is no need to get the entire document to know this.
+
+The zero based offset at the document's end represents the location of the character that would follow the last character, thus it is equal to the length of the document's text. We can easily get this offset by using vscode.TextDocument.offsetAt() and passing it Position.getDocumentEnd(). If there are no changes this offset will be equals to historyTracker.oldText.length. 
+
+This would increase the performance when navigating through large files, currently passes all tests and should be 100% safe to add. 
+
+[newNavigation.cpuprofile.txt](https://github.com/VSCodeVim/Vim/files/3962659/newNavigation.cpuprofile.txt)
+[oldNavigation.cpuprofile.txt](https://github.com/VSCodeVim/Vim/files/3962660/oldNavigation.cpuprofile.txt)
+
+
+**Improvements while on insert mode**
+
+The major issue is that addChange() gets called on every key press, thus the entire document is getting processed every few milliseconds, which is why we experience more lag the faster we make changes on large files. Currently the first change after going into insert mode triggers _addnewHistoryStep(), consequent changes are added to the historyStep and then when we get out of insert mode we finalise that historyStep.
+
+We can add a condition that checks if the currentMode === Mode.Insert to get out of addChange() and prevent processing the document while changes are still in progress. The condition shouldn't trigger if we just created a new history step. What this change does is that we can grab the first change and the last change, but nothing in between. I don't believe we use the substeps anyway, we do need the first step to be logged so that we don't brake historyTracker.goBackHistoryStepsOnLine().
