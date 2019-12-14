@@ -13,7 +13,7 @@ I was initially enthralled by this particular issue: ['Investigate optimizing Hi
 
 Profiling a VSCode extension is not very difficult, I won't go over the steps here, but if you are interested just follow this [link].  As mentioned before, I did multiple profilings and the results were pretty consistent with these: 
 
-- [largeFileFastEditing.cpuprofile.txt]({{ site.baseurl }} {%link /assets/largeFileFastEditing.cpuprofile.txt %})
+- [largeFileFastEditing.cpuprofile.txt]({{ site.baseurl }} {% link /assets/largeFileFastEditing.cpuprofile.txt %})
 - [largeFileSlowEditing.cpuprofile.txt]({{ site.baseurl }}{% link /assets/largeFileSlowEditing.cpuprofile.txt %})
 - [oldNavigation.cpuprofile.txt]({{ site.baseurl }}{% link /assets/oldNavigation.cpuprofile.txt %})
 
